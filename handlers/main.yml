@@ -1,0 +1,8 @@
+---
+- name: Restarting Kafka-Manager
+  systemd:
+    name: kafka-manager
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  listen: Restart Kafka-Manager

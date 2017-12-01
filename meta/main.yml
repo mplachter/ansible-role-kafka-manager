@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: Matthew Plachter
+  description: An Ansible Role For Installing Yahoo Kafka Manager And Configuring
+  company: N/A
+  license:
+    - MIT
+  min_ansible_version: 2.3
+  platforms:
+    - name: EL
+      versions:
+        - 7
+  galaxy_tags:
+    - kafka
+    - manager
+
+dependencies:
+  - role: andrewrothstein.java-oracle-jdk
+    version: v2.0.0

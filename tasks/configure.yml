@@ -1,0 +1,30 @@
+---
+- name: Change Permissions And Create softlink
+  file:
+    path: "{{ installation_path }}/kafka-manager-{{kafka_manager_ver}}"
+    src: "{{ installation_path }}/kafka-manager-{{kafka_manager_ver}}"
+    dest: "{{ installation_path }}/kafka-manager"
+    state: link
+    force: yes
+    owner: "{{owner}}"
+
+- name: Create Configuration File
+  template:
+    src: "../templates/application.conf.j2"
+    dest: "{{kafka_manager_config}}"
+    owner: root
+    group: root
+    mode: '0664'
+    force: yes
+  notify:
+    - Restart Kafka-Manager
+
+- name: Create Kafka-Manager Service
+  template:
+    src: kafka-manager.service.j2
+    dest: "/etc/systemd/system/kafka-manager.service"
+    owner: "{{owner}}"
+    group: "{{group}}"
+    force: yes
+  notify:
+    - Restart Kafka-Manager

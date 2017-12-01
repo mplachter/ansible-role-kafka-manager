@@ -1,0 +1,13 @@
+---
+kafka_manager_name : '{{kafka_manager_ver}}'
+kafka_manager_tgz : '{{kafka_manager_name}}.tar.gz'
+
+# EXAMPLE # https://github.com/yahoo/kafka-manager/archive/1.3.3.6.tar.gz
+kafka_manager_tgz_url : '{{kafka_manager_mirror}}/{{kafka_manager_tgz}}'
+
+# Kafka Manager Config Path
+kafka_installed_path : '{{installation_path}}/kafka-manager'
+kafka_manager_config : '{{kafka_installed_path}}/application.conf'
+
+# Pre Built Kafka Manager
+pre_built_kafka_manager : '{{path_to_locally_built_kafka_manager}}'

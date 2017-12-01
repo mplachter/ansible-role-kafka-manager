@@ -1,0 +1,27 @@
+---
+# Kafka Manager Remote Download
+kafka_manager_ver: '1.3.3.14'
+kafka_manager_mirror: https://github.com/yahoo/kafka-manager/archive
+download_path: /tmp
+
+# Kafka Manager Install Defualt Settings
+installation_path: /usr/local
+listen_port: 8080
+
+# Linux Directory Permissions
+owner: root
+group: root
+
+kafka_manager_features:
+  - KMClusterManagerFeature
+  - KMTopicManagerFeature
+  - KMPreferredReplicaElectionFeature
+  - KMReassignPartitionsFeature
+
+kafka_manager_auth_enabled: false
+kafka_manager_auth_username: admin
+kafka_manager_auth_password: password
+kafka_manager_play_crypto_secret: /HeV^GoZV00N=ov8`IRL3:iTDX3[WNgS1hMMPl/3Y0[qfKCncDspHaNSYNyoB3XA
+kafka_manager_zookeeper_host:
+  - name: 127.0.0.1
+    port: 2181

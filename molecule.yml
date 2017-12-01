@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+  requirements_file: tests/requirements.yml
+ansible:
+  playbook: tests/test.yml
+driver:
+  name: docker
+docker:
+  containers:
+    - name: docker-centos-kafka-manager
+      ansible_groups:
+        - kafka-manager
+      hostname: centos-kafka-manager
+      image: mplachter/docker-centos7-molecule
+      image_version: latest
+      port_bindings:
+        8080: 8080
+      privileged: True
+      cap_add:
+        - SYS_ADMIN
+      volume:
+        - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+      command: "/usr/sbin/init"
+verifier:
+  name: testinfra
+  options:
+      verbose: true

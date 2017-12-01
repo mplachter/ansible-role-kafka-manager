@@ -1,0 +1,13 @@
+[Unit]
+Description=Kafka Manager Application On %I
+After=network.target
+
+[Service]
+Type=simple
+User={{owner}}
+WorkingDirectory={{kafka_installed_path}}
+PIDFile={{kafka_installed_path}}/%i.pid
+ExecStart=/bin/sh -c '. /etc/profile.d/java-oracle.sh; {{kafka_installed_path}}/bin/kafka-manager -Dconfig.file={{kafka_manager_config}} -Dhttp.port={{listen_port}}'
+
+[Install]
+WantedBy=multi-user.target

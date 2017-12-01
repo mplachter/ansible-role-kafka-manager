@@ -1,0 +1,8 @@
+*.retry
+.molecule
+.vagrant
+.cahce
+tests/files/
+__pycache__
+.vscode
+tests/group_vars

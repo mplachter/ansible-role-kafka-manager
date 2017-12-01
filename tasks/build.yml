@@ -1,0 +1,39 @@
+---
+- name: Downloading and Unarchive Kafka Manage
+  become: fasle
+  unarchive:
+    creates: "{{download_path}}/kafka-manager-{{kafka_manager_ver}}/target/universal/kafka-manager-{{kafka_manager_ver}}.zip"
+    src: "{{kafka_manager_tgz_url}}"
+    dest: "{{download_path}}"
+    remote_src: yes
+  delegate_to: localhost
+  when: path_to_locally_built_kafka_manager is undefined
+
+- name: Building Kafka Manager This Will Take A While!
+  become: fasle
+  shell: "export PATH=$PATH:{{java_oracle_link_dir}}/bin && ./sbt clean dist"
+  args:
+    creates: "{{download_path}}/kafka-manager-{{kafka_manager_ver}}/target/universal/kafka-manager-{{kafka_manager_ver}}.zip"
+    chdir: "{{download_path}}/kafka-manager-{{kafka_manager_ver}}"
+    executable: /bin/bash
+  delegate_to: localhost
+  when: path_to_locally_built_kafka_manager is undefined
+
+- name: Unarchive Clean built Yahoo kafka manager
+  unarchive:
+    creates: "{{installation_path}}/kafka-manager-{{kafka_manager_ver}}"
+    src: "{{download_path}}/kafka-manager-{{kafka_manager_ver}}/target/universal/kafka-manager-{{kafka_manager_ver}}.zip"
+    dest: "{{installation_path}}"
+    remote_src: false
+  notify:
+    - Restart Kafka-Manager
+  when: path_to_locally_built_kafka_manager is undefined
+
+- name: Copying Pre Built Kafka Manager
+  unarchive:
+    creates: "{{installation_path}}/kafka-manager-{{kafka_manager_ver}}"
+    src: "{{path_to_locally_built_kafka_manager}}"
+    dest: "{{installation_path}}"
+  notify:
+    - Restart Kafka-Manager
+  when: path_to_locally_built_kafka_manager is defined
