@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/mplachter/yahoo-kafka-manager.svg?branch=master)](https://travis-ci.org/mplachter/yahoo-kafka-manager)
-
 Yahoo-Kafka-Manager
 =========
 
@@ -22,6 +20,7 @@ Requirements
   * Ansible 2.3
   * Java 1.8 JDK
   * Unzip
+  * SBT
 * Testing
   * Docker
   * Molecule 1.25.0
@@ -85,6 +84,18 @@ Role Variables
   kafka_manager_zookeeper_host:
     - name: 127.0.0.1
       port: 2181
+  ```
+
+* You can bypass the automated build by already having a built **Yahoo Kafka Manager** in zip form
+  * Below is an example of using a prebuilt **Yahoo Kafka Manager**
+
+  ```
+    - hosts: all
+      roles:
+        - role: mplachter.kafka-manager
+      vars:
+        path_to_locally_built_kafka_manager: files/kafka-manager-1.3.3.6.zip
+        kafka_manager_ver: 1.3.3.6
   ```
 
 Dependencies

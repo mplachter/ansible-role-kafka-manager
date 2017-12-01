@@ -4,6 +4,7 @@ dependency:
   requirements_file: tests/requirements.yml
 ansible:
   playbook: tests/test.yml
+  verbose: false
 driver:
   name: docker
 docker:
